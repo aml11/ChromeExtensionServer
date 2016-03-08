@@ -1,0 +1,13 @@
+Sometimes (in enterprise situations for example) you need to deploy a
+1. Custom made extension (that isn't in the store)
+2. Regular extension, but you don't have access to the internet 
+
+This is what this project is about, it allows to deploy any extension by:
+1. Building the project
+2. Under the binary folder create another folder called files
+3. Place on a computer with a fixed name, say "ChromeLocalStore"
+4. Build a CRX (https://developer.chrome.com/extensions/packaging), either custom or extract one from the official store. Make sure update url points to "ChromeLocalStore" i.e. "update_url": "http://ChromeLocalStore" in the manifest.json.
+3. Place any CRX under it with the file name being its ID (for example Chrome Docs Offline ID is ghbmnnjooekpmoecnnnilnnbdlolhkhi so the file name would be ghbmnnjooekpmoecnnnilnnbdlolhkhi.crx)
+4. Setup a GPO according to https://www.chromium.org/administrators/policy-list-3#ExtensionInstallForcelist - make sure to write <id>;http://ChromeLocalStore
+5. Make sure GPO was updated (gpupdate /force) and start chrome.
+
